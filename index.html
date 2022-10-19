@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        h1{
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <h2>Coffee House</h2>
+<div class="container-fluid">
+    <div class="container">
+        <div class="part1">
+            <fieldset>
+                <legend>Personal Information</legend>
+                Full Name: <input type="text" id="name"> <br/>
+
+                Your Mobile no.: <input type="text" id="mobile">
+            </fieldset>
+        </div>
+
+
+        <div class="part2">
+            <fieldset>
+                <legend>Your Orders</legend>
+                Espresso(milk): <input type="text" id="em"> <br/>
+                Espresso(cream): <input type="text" id="ec"> <br/>
+                Espresso(latte): <input type="text" id="el"> <br/>
+                Cappuccino(milk): <input type="text" id="cm"><br/>
+                Cappuccino(cream): <input type="text" id="cc"><br/>
+                Cappuccino(latte): <input type="text" id="cl"><br/>
+                Latte(milk): <input type="text" id="lm"><br/>
+                Latte(cream): <input type="text" id="lc"><br/>
+                Latte(latte): <input type="text" id="ll"><br/>
+
+            </fieldset>
+        </div>
+        
+    </div>
+
+    <div class="container">
+        <fieldset>
+            <legend>Your Bill</legend>
+            <h3>Your Name:<span id="name2"></span></h3>
+            <h3>Mobile no.: <span id="mobile2"></span></h3>
+            <table border="1" >
+                <thead>
+                    <tr><th>Menu</th><th>Price</th><th>Quantity</th><th>Amount</th></tr>
+                </thead>
+                <tbody id="bill">
+
+                </tbody>
+
+                
+
+            </table>
+            </fieldset>
+            <h1>Total Amout: Rs. <span id="amount">0</span></h1>
+            
+    </div>
+</div>
+<script>
+var EspressoM = 60, EspressoC = 75, EspressoL = 100, CappuccinoM =80, CappuccinoC =90, CappuccinoL =125, LatteM = 100, LatteC = 125, LatteL = 150;
+var EspressoM_q=0, EspressoC_q=0, EspressoL_q=0, CappuccinoM_q=0, CappuccinoC_q=0, CappuccinoL_q=0, LatteM_q=0, LatteC_q=0, LatteL_q=0;
+var name = "", mobile="";
+var EspressoMBill="", EspressoCBill="", EspressoLBill="", CappuccinoMBill="", CappuccinoCBill="", CappuccinoLBill="", LatteMBill="", LatteCBill="", LatteLBill="";
+var total_amount=0;
+document.getElementById("name").addEventListener("keyup",function(){
+    
+    
+    document.getElementById("name2").innerHTML=this.value;
+});
+
+document.getElementById("mobile").addEventListener("keyup",function(){
+    
+    
+    document.getElementById("mobile2").innerHTML=this.value;
+});
+
+
+
+document.getElementById("em").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    EspressoMBill="";
+    EspressoM_q=0;
+    showBill();
+}else{
+    EspressoM_q=this.value;
+    EspressoMBill="<tr><td>Espresso(Milk)</td><td>Rs. "+EspressoM+"</td><td>"+EspressoM_q+"</td><td>"+EspressoM+"x"+EspressoM_q+" = "+EspressoM*EspressoM_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("ec").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    EspressoCBill="";
+    EspressoC_q=0;
+    showBill();
+}else{
+    EspressoC_q=this.value;
+    EspressoCBill="<tr><td>Espresso(Cream)</td><td>Rs. "+EspressoC+"</td><td>"+EspressoC_q+"</td><td>"+EspressoC+"x"+EspressoC_q+" = "+EspressoC*EspressoC_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("el").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    EspressoLBill="";
+    EspressoL_q=0;
+    showBill();
+}else{
+    EspressoL_q=this.value;
+    EspressoLBill="<tr><td>Espresso(Latte)</td><td>Rs. "+EspressoL+"</td><td>"+EspressoL_q+"</td><td>"+EspressoL+"x"+EspressoL_q+" = "+EspressoL*EspressoL_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("cm").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    CappuccinoMBill="";
+    CappuccinoM_q=0;
+    showBill();
+}else{
+    CappuccinoM_q=this.value;
+    CappuccinoMBill="<tr><td>Capuccino(Milk)</td><td>Rs. "+CappuccinoM+"</td><td>"+CappuccinoM_q+"</td><td>"+CappuccinoM+"x"+CappuccinoM_q+" = "+CappuccinoM*CappuccinoM_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("cc").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    CappuccinoCBill="";
+    CappuccinoC_q=0;
+    showBill();
+}else{
+    CappuccinoC_q=this.value;
+    CappuccinoCBill="<tr><td>Capuccino(cream)</td><td>Rs. "+CappuccinoC+"</td><td>"+CappuccinoC_q+"</td><td>"+CappuccinoC+"x"+CappuccinoC_q+" = "+CappuccinoC*CappuccinoC_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("cl").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    CappuccinoLBill="";
+    CappuccinoL_q=0;
+    showBill();
+}else{
+    CappuccinoL_q=this.value;
+    CappuccinoLBill="<tr><td>Capuccino(Latte)</td><td>Rs. "+CappuccinoL+"</td><td>"+CappuccinoL_q+"</td><td>"+CappuccinoL+"x"+CappuccinoL_q+" = "+CappuccinoL*CappuccinoL_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("lm").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    LatteMBill="";
+    LatteM_q=0;
+    showBill();
+}else{
+    LatteM_q=this.value;
+    LatteMBill="<tr><td>Latte(milk)</td><td>Rs. "+LatteM+"</td><td>"+LatteM_q+"</td><td>"+LatteM+"x"+LatteM_q+" = "+LatteM*LatteM_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("lc").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    LatteCBill="";
+    LatteC_q=0;
+    showBill();
+}else{
+    LatteC_q=this.value;
+    LatteCBill="<tr><td>Latte(cream)</td><td>Rs. "+LatteC+"</td><td>"+LatteC_q+"</td><td>"+LatteC+"x"+LatteC_q+" = "+LatteC*LatteC_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+document.getElementById("ll").addEventListener("keyup",function(){
+if(this.value==""||this.value==0){
+    LatteLBill="";
+    LatteL_q=0;
+    showBill();
+}else{
+    LatteL_q=this.value;
+    LatteLBill="<tr><td>Latte(latte)</td><td>Rs. "+LatteL+"</td><td>"+LatteL_q+"</td><td>"+LatteL+"x"+LatteL_q+" = "+LatteL*LatteL_q+"</td></tr>";
+    showBill();
+
+}
+});
+
+function showBill(){
+    document.getElementById("bill").innerHTML=EspressoMBill+EspressoCBill+EspressoLBill+CappuccinoMBill+CappuccinoCBill+CappuccinoLBill+LatteMBill+LatteCBill+LatteLBill;
+    document.getElementById("amount").innerHTML = EspressoM*EspressoM_q+EspressoC*EspressoC_q+EspressoL*EspressoL_q+CappuccinoM*CappuccinoM_q+CappuccinoC*CappuccinoC_q+CappuccinoL*CappuccinoL_q+LatteM*LatteM_q+LatteC*LatteC_q+LatteL*LatteL_q; 
+}
+</script>
+</body>
+</html>
